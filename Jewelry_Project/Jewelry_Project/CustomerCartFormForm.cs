@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
-	public partial class Form1 : Form
-	{
-		public Form1()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class CustomerCartFormForm : Form
+    {
+        public CustomerCartFormForm()
+        {
+            InitializeComponent();
+        }
+    }
 }
