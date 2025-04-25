@@ -1,0 +1,20 @@
+# Ignore build output and VS artifacts
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.vsidx
+
+# Ignore compiled files
+*.dll
+*.exe
+*.pdb
+
+# Ignore NuGet and package folders
+packages/
+*.nupkg
+
+# Ignore local ZIPs or exports
+*.zip
