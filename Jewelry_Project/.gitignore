@@ -18,3 +18,29 @@ packages/
 
 # Ignore local ZIPs or exports
 *.zip
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# VS Code
+.vscode/
+
+# VS-generated folders/files
+.vs/
+*.dbmdl
+*.sqlite
+*.cache
+*.log
+
+# Others
+*.vsix
+*.nupkg
+
