@@ -12,9 +12,14 @@ namespace Jewelry_Project
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        public AdminForm(string username)
         {
             InitializeComponent();
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

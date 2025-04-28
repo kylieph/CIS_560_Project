@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
-    public partial class CustomerCartFormForm : Form
+    public partial class ItemInfoForm : Form
     {
-        public CustomerCartFormForm()
+        public ItemInfoForm(string name, string description, string price)
         {
             InitializeComponent();
+            itemNameLabel.Text = name;
+            descriptionLabel.Text = description;
+            priceLabel.Text = price;
         }
     }
 }

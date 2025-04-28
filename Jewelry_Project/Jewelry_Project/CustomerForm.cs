@@ -6,32 +6,132 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Jewelry_Project
 {
     public partial class CustomerForm : Form
     {
-        public CustomerForm()
+        private string _username;
+        private List<(string Name, int Quantity, string Price)> cartItems = new List<(string Name, int Quantity, string Price)>();
+        public CustomerForm(string username)
         {
             InitializeComponent();
+            _username = username;
+            usernameLabel.Text = username;
+            tableLayoutPanel.Dock = DockStyle.Fill;
         }
 
         private void profileButton_Click(object sender, EventArgs e)
         {
-            ProfileForm profileForm = new ProfileForm();
+            ProfileForm profileForm = new ProfileForm(_username);
             profileForm.Show();
         }
 
         private void newReleasesButton_Click(object sender, EventArgs e)
         {
-            
+            itemsFlowLayoutPanel.Controls.Clear();
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("Store.GetNewestReleases", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            string description = reader["Description"].ToString();
+                            decimal itemPrice = (decimal)reader["ItemPrice"];
+
+                            Panel itemPanel = new Panel()
+                            {
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Margin = new Padding(3)
+                            };
+
+                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+
+                            Button addToCartButton = new Button();
+                            addToCartButton.Text = "Add to Cart";
+                            addToCartButton.Click += addToCartButton_Click;
+
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                            };
+
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(addToCartButton);
+                            flowLayoutPanel.Margin = new Padding(16);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+                            itemPanel.Click += panel_Click;
+
+                            nameLabel.Location = new Point(5, 5);
+                            priceLabel.Location = new Point(5, 25);
+                            addToCartButton.Location = new Point(5, 50);
+
+                            itemsFlowLayoutPanel.Controls.Add(itemPanel);
+                        }
+                    }
+                }
+            }
+        }
+        private void addToCartButton_Click(object sender, EventArgs e)
+        {
+            Panel clickedPanel = sender as Panel;
+            /*if (clickedPanel != null && clickedPanel.Tag is Tuple<string, string, string> itemInfo)
+            {
+                string name = itemInfo.Item1;
+                string description = itemInfo.Item2;
+                string price = itemInfo.Item3;
+                if (cartItems.Contains)
+                {
+
+                }
+                else
+                {
+                    cartItems.Add((name, 1, price));
+                }
+            }*/
+        }
+
+        private void panel_Click(object sender, EventArgs e)
+        {
+            Panel clickedPanel = sender as Panel;
+            if (clickedPanel != null && clickedPanel.Tag is Tuple<string, string, string> itemInfo)
+            {
+                string name = itemInfo.Item1;
+                string description = itemInfo.Item2;
+                string price = itemInfo.Item3;
+                ItemInfoForm itemInfoForm = new ItemInfoForm(name, description, price);
+                itemInfoForm.Show();
+            }
         }
 
         private void CustomerForm_Load(object sender, EventArgs e)
         {
+            itemsFlowLayoutPanel.FlowDirection = FlowDirection.LeftToRight;
+            itemsFlowLayoutPanel.WrapContents = true;
+            itemsFlowLayoutPanel.AutoScroll = true;
+            itemsFlowLayoutPanel.Dock = DockStyle.Fill;
+
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -73,25 +173,213 @@ namespace Jewelry_Project
 
                             Panel itemPanel = new Panel()
                             {
-                                Width = 50,
-                                Height = 50,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 Margin = new Padding(3)
+
+                                
                             };
 
                             Label nameLabel = new Label { Text = itemName, AutoSize = true };
                             Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
-                            Label descLabel = new Label { Text = description, AutoSize = true };
 
-                            itemPanel.Controls.Add(nameLabel);
-                            itemPanel.Controls.Add(priceLabel);
-                            itemPanel.Controls.Add(descLabel);
+                            Button addToCartButton = new Button();
+                            addToCartButton.Text = "Add to Cart";
+                            addToCartButton.Click += addToCartButton_Click;
 
-                            // Stack labels vertically
-                            /*
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                            };
+                            
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(addToCartButton);
+                            flowLayoutPanel.Margin = new Padding(16);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+                            itemPanel.Click += panel_Click;
+                            
                             nameLabel.Location = new Point(5, 5);
                             priceLabel.Location = new Point(5, 25);
-                            descLabel.Location = new Point(5, 45);
-                            */
+                            addToCartButton.Location = new Point(5, 50);
+
+                            itemsFlowLayoutPanel.Controls.Add(itemPanel);                           
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cartButton_Click(object sender, EventArgs e)
+        {
+            CustomerCartForm cartForm = new CustomerCartForm();
+            cartForm.Show();
+        }
+
+        private void metalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string metalType = metalComboBox.SelectedItem.ToString();
+            int metalID = 0;
+            if (!(metalType == "Gold" || metalType == "Silver" || (metalType == "Bronze" || metalType == "Rose Gold")))
+            {
+                return;
+            }
+            itemsFlowLayoutPanel.Controls.Clear();
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                string sql = "SELECT MetalID FROM Store.[MetalTypes] WHERE MetalName = @MetalName";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MetalName", metalType);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            metalID = Convert.ToInt32(reader["MetalID"]);
+                        }
+                    }
+                }
+                using (SqlCommand cmd = new SqlCommand("Store.GetAllProductsMetal", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@MetalID", metalID);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            string description = reader["Description"].ToString();
+                            decimal itemPrice = (decimal)reader["ItemPrice"];
+
+                            Panel itemPanel = new Panel()
+                            {
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Margin = new Padding(3)
+
+
+                            };
+
+                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+
+                            Button addToCartButton = new Button();
+                            addToCartButton.Text = "Add to Cart";
+                            addToCartButton.Click += addToCartButton_Click;
+
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                            };
+
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(addToCartButton);
+                            flowLayoutPanel.Margin = new Padding(16);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+                            itemPanel.Click += panel_Click;
+
+                            nameLabel.Location = new Point(5, 5);
+                            priceLabel.Location = new Point(5, 25);
+                            addToCartButton.Location = new Point(5, 50);
+
+                            itemsFlowLayoutPanel.Controls.Add(itemPanel);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string categoryType = categoryComboBox.SelectedItem.ToString();
+            int categoryID = 0;
+            if (!(categoryType == "Rings" || categoryType == "Earrings" || (categoryType == "Bracelets" || categoryType == "Necklaces" || categoryType == "Anklets")))
+            {
+                return;
+            }
+            itemsFlowLayoutPanel.Controls.Clear();
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                string sql = "SELECT CategoryID FROM Store.[Categories] WHERE CategoryName = @CategoryName";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CategoryName", categoryType);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            categoryID = Convert.ToInt32(reader["CategoryID"]);
+                        }
+                    }
+                }
+                using (SqlCommand cmd = new SqlCommand("Store.GetAllProductsCategory", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            string description = reader["Description"].ToString();
+                            decimal itemPrice = (decimal)reader["ItemPrice"];
+
+                            Panel itemPanel = new Panel()
+                            {
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Margin = new Padding(3)
+
+
+                            };
+
+                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+
+                            Button addToCartButton = new Button();
+                            addToCartButton.Text = "Add to Cart";
+                            addToCartButton.Click += addToCartButton_Click;
+
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                            };
+
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(addToCartButton);
+                            flowLayoutPanel.Margin = new Padding(16);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+                            itemPanel.Click += panel_Click;
+
+                            nameLabel.Location = new Point(5, 5);
+                            priceLabel.Location = new Point(5, 25);
+                            addToCartButton.Location = new Point(5, 50);
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }
