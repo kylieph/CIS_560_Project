@@ -17,12 +17,34 @@ namespace Jewelry_Project
     public partial class CustomerForm : Form
     {
         private string _username;
+        private int _userID;
         private List<(string Name, int Quantity, string Price)> cartItems = new List<(string Name, int Quantity, string Price)>();
+
         public CustomerForm(string username)
         {
             InitializeComponent();
+
             _username = username;
             usernameLabel.Text = username;
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                string sql = "SELECT UserID FROM Store.[User] WHERE Username = @Username";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            _userID = Convert.ToInt32(reader["UserID"]);
+                        }
+                    }
+                }
+            }
+
             tableLayoutPanel.Dock = DockStyle.Fill;
         }
 
@@ -95,21 +117,39 @@ namespace Jewelry_Project
         }
         private void addToCartButton_Click(object sender, EventArgs e)
         {
-            Panel clickedPanel = sender as Panel;
-            /*if (clickedPanel != null && clickedPanel.Tag is Tuple<string, string, string> itemInfo)
+            Button addButton = sender as Button;
+            if (addButton?.Parent?.Parent is Panel itemPanel && itemPanel.Tag is Tuple<string, string, decimal> itemInfo)
             {
-                string name = itemInfo.Item1;
-                string description = itemInfo.Item2;
-                string price = itemInfo.Item3;
-                if (cartItems.Contains)
-                {
+                string itemName = itemInfo.Item1;
+                int itemID = 0;
 
-                }
-                else
+                string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    cartItems.Add((name, 1, price));
+                    conn.Open();
+                    string sql = "SELECT StockItemID FROM Store.[Items] WHERE ItemName = @ItemName";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ItemName", itemName);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                itemID = Convert.ToInt32(reader["StockItemID"]);
+                            }
+                        }
+                    }
+
+
+                    using (SqlCommand cmd = new SqlCommand("Store.AddToCart", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", _userID);
+                        cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
-            }*/
+            }
         }
 
         private void panel_Click(object sender, EventArgs e)
@@ -218,7 +258,7 @@ namespace Jewelry_Project
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            CustomerCartForm cartForm = new CustomerCartForm();
+            CustomerCartForm cartForm = new CustomerCartForm(_userID);
             cartForm.Show();
         }
 

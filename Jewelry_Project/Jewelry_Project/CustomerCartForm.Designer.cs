@@ -28,23 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.cartLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.totalDisplayLabel = new System.Windows.Forms.Label();
             this.checkoutButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(157, 84);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersWidth = 62;
-            this.dataGridView.RowTemplate.Height = 28;
-            this.dataGridView.Size = new System.Drawing.Size(484, 248);
-            this.dataGridView.TabIndex = 0;
             // 
             // cartLabel
             // 
@@ -87,30 +76,37 @@
             this.checkoutButton.UseVisualStyleBackColor = true;
             this.checkoutButton.Click += new System.EventHandler(this.checkoutButton_Click);
             // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoSize = true;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(158, 103);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(488, 218);
+            this.flowLayoutPanel.TabIndex = 5;
+            // 
             // CustomerCartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.checkoutButton);
             this.Controls.Add(this.totalDisplayLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cartLabel);
-            this.Controls.Add(this.dataGridView);
             this.Name = "CustomerCartForm";
             this.Text = "Cart";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.Load += new System.EventHandler(this.CustomerCartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Label cartLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label totalDisplayLabel;
         private System.Windows.Forms.Button checkoutButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }
