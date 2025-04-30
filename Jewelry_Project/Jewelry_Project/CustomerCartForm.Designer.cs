@@ -79,6 +79,7 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoSize = true;
+            this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel.Location = new System.Drawing.Point(158, 103);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
             this.flowLayoutPanel.Size = new System.Drawing.Size(488, 218);

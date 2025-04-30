@@ -56,6 +56,8 @@ namespace Jewelry_Project
 
         private void newReleasesButton_Click(object sender, EventArgs e)
         {
+            categoryComboBox.Text = " ";
+            metalComboBox.Text = " ";
             itemsFlowLayoutPanel.Controls.Clear();
 
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
@@ -215,9 +217,7 @@ namespace Jewelry_Project
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                                Margin = new Padding(3)
-
-                                
+                                Margin = new Padding(3)                               
                             };
 
                             Label nameLabel = new Label { Text = itemName, AutoSize = true };
@@ -233,8 +233,7 @@ namespace Jewelry_Project
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 Dock = DockStyle.Fill,
-                            };
-                            
+                            };                            
 
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
@@ -243,11 +242,7 @@ namespace Jewelry_Project
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;
-                            
-                            nameLabel.Location = new Point(5, 5);
-                            priceLabel.Location = new Point(5, 25);
-                            addToCartButton.Location = new Point(5, 50);
+                            itemPanel.Click += panel_Click;                          
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);                           
                         }
@@ -264,6 +259,7 @@ namespace Jewelry_Project
 
         private void metalComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            categoryComboBox.Text = " ";
             string metalType = metalComboBox.SelectedItem.ToString();
             int metalID = 0;
             if (!(metalType == "Gold" || metalType == "Silver" || (metalType == "Bronze" || metalType == "Rose Gold")))
@@ -347,6 +343,7 @@ namespace Jewelry_Project
 
         private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            metalComboBox.Text = " ";
             string categoryType = categoryComboBox.SelectedItem.ToString();
             int categoryID = 0;
             if (!(categoryType == "Rings" || categoryType == "Earrings" || (categoryType == "Bracelets" || categoryType == "Necklaces" || categoryType == "Anklets")))

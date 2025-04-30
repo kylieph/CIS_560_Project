@@ -15,6 +15,10 @@ namespace Jewelry_Project
     {
         private int _userID;
 
+        private decimal _subtotal;
+
+        private int _itemCount;
+
         public CustomerCartForm(int userID)
         {
             InitializeComponent();
@@ -23,13 +27,35 @@ namespace Jewelry_Project
 
         private void checkoutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Thank you for your purchase!\nOrder ID number: \nItems Ordered: \nSubtotal: {totalDisplayLabel.Text}\nExpect your order within 3-5 business days.");
-            flowLayoutPanel.Controls.Clear();
+            if (flowLayoutPanel.Controls.Count > 0)
+            {
+                MessageBox.Show($"Thank you for your purchase!\nItems Ordered: {_itemCount}\nSubtotal: ${_subtotal}\nExpect your order within 3-5 business days.");
+                flowLayoutPanel.Controls.Clear();
+                totalDisplayLabel.Text = "$";
+                string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("Store.DeleteCartItems", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", _userID);
+                        using (SqlDataReader reader = cmd.ExecuteReader()) { }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No items in your cart.");
+            }
         }
 
         private void CustomerCartForm_Load(object sender, EventArgs e)
         {
             flowLayoutPanel.Controls.Clear();
+
+            decimal subtotal = 0;
+            int itemCount = 0;
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -43,13 +69,17 @@ namespace Jewelry_Project
                         while (reader.Read())
                         {
                             string itemName = reader["ItemName"].ToString();
-                            Label nameLabel = new Label() { Text = itemName };
-                            string price = reader["ItemPrice"].ToString();
-                            Label priceLabel = new Label() { Text = price };
-                            string quantity = reader["Quantity"].ToString();
-                            Label quantityLabel = new Label() { Text = quantity };
+                            Label nameLabel = new Label() { Text = itemName, AutoSize = true };
+                            string stringPrice = reader["ItemPrice"].ToString();
+                            Label priceLabel = new Label() { Text = stringPrice, AutoSize = true };
+                            decimal price = Convert.ToDecimal(stringPrice);
+                            subtotal += price;
+                            string stringQuantity = reader["Quantity"].ToString();
+                            Label quantityLabel = new Label() { Text = stringQuantity, AutoSize = true };
+                            int quantity = Convert.ToInt32(stringQuantity);
+                            itemCount += quantity;
                             string totalPrice = reader["TotalPrice"].ToString();
-                            Label totalPriceLabel = new Label() { Text = totalPrice };
+                            Label totalPriceLabel = new Label() { Text = totalPrice, AutoSize = true };
                             FlowLayoutPanel innerPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.LeftToRight,
@@ -61,10 +91,14 @@ namespace Jewelry_Project
                             innerPanel.Controls.Add(quantityLabel);
                             innerPanel.Controls.Add(totalPriceLabel);
 
+                            flowLayoutPanel.Controls.Add(innerPanel);                         
                         }
                     }
                 }
             }
+            totalDisplayLabel.Text = $"${subtotal}";
+            _subtotal = subtotal;
+            _itemCount = itemCount;
         }
     }
 }
