@@ -78,11 +78,12 @@
             // 
             // flowLayoutPanel
             // 
+            this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.AutoSize = true;
             this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(158, 103);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(129, 103);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(488, 218);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(538, 218);
             this.flowLayoutPanel.TabIndex = 5;
             // 
             // CustomerCartForm

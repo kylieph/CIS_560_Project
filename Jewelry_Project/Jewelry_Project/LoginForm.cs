@@ -23,8 +23,7 @@ namespace Jewelry_Project
             if (usernameTextBox.Text != null &&  passwordTextBox.Text != null)
             {
                 Login(usernameTextBox.Text, passwordTextBox.Text);
-            }
-            
+            }           
         }
 
         private void Login(string usernameAttempt, string passwordAttempt)
