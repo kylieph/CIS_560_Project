@@ -16,6 +16,7 @@ namespace Jewelry_Project
         public LoginForm()
         {
             InitializeComponent();
+            loginButton.Click -= loginButton_Click;
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -23,7 +24,7 @@ namespace Jewelry_Project
             if (usernameTextBox.Text != null &&  passwordTextBox.Text != null)
             {
                 Login(usernameTextBox.Text, passwordTextBox.Text);
-            }           
+            }         
         }
 
         private void Login(string usernameAttempt, string passwordAttempt)
@@ -85,7 +86,7 @@ namespace Jewelry_Project
 
         private void passwordTextBox_TextChanged(object sender, EventArgs e)
         {
-            loginButton.Enabled = true;
+            loginButton.Click += loginButton_Click;
         }
 
         private void newAccountButton_Click(object sender, EventArgs e)

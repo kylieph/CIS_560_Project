@@ -45,7 +45,8 @@ namespace Jewelry_Project
                 }
             }
 
-            tableLayoutPanel.Dock = DockStyle.Fill;
+            filteringFlowLayoutPanel.Margin = new Padding(15);
+            itemsFlowLayoutPanel.Margin = new Padding(15);
         }
 
         private void profileButton_Click(object sender, EventArgs e)
@@ -169,10 +170,19 @@ namespace Jewelry_Project
 
         private void CustomerForm_Load(object sender, EventArgs e)
         {
+            tableLayoutPanel.Dock = DockStyle.Fill;
+            tableLayoutPanel.RowStyles[0] = new RowStyle(SizeType.AutoSize);
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+            filteringFlowLayoutPanel.Dock = DockStyle.Fill;
+            filteringFlowLayoutPanel.Margin = new Padding(10);
+
             itemsFlowLayoutPanel.FlowDirection = FlowDirection.LeftToRight;
             itemsFlowLayoutPanel.WrapContents = true;
             itemsFlowLayoutPanel.AutoScroll = true;
             itemsFlowLayoutPanel.Dock = DockStyle.Fill;
+            itemsFlowLayoutPanel.Margin = new Padding(15);
 
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -217,14 +227,13 @@ namespace Jewelry_Project
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                                Margin = new Padding(3)                               
+                                Margin = new Padding(16)                               
                             };
 
-                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
-                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+                            Label nameLabel = new Label { Text = itemName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), Font = new Font("Mongolian Baiti", 10), AutoSize = true };
 
-                            Button addToCartButton = new Button();
-                            addToCartButton.Text = "Add to Cart";
+                            Button addToCartButton = new Button() { Text = "Add to Cart", Font = new Font("Mongolian Baiti", 10), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(6) };
                             addToCartButton.Click += addToCartButton_Click;
 
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
@@ -233,12 +242,14 @@ namespace Jewelry_Project
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 Dock = DockStyle.Fill,
+                                BackColor = Color.FloralWhite,
+                                BorderStyle = BorderStyle.FixedSingle,
+                                Margin = new Padding(15),
                             };                            
 
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
-                            flowLayoutPanel.Margin = new Padding(16);
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
@@ -305,8 +316,8 @@ namespace Jewelry_Project
 
                             };
 
-                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
-                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+                            Label nameLabel = new Label { Text = itemName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), Font = new Font("Mongolian Baiti", 10), AutoSize = true };
 
                             Button addToCartButton = new Button();
                             addToCartButton.Text = "Add to Cart";
@@ -318,6 +329,8 @@ namespace Jewelry_Project
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 Dock = DockStyle.Fill,
+                                BackColor = Color.FloralWhite,
+                                BorderStyle = BorderStyle.None,
                             };
 
 
@@ -329,10 +342,6 @@ namespace Jewelry_Project
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
                             itemPanel.Click += panel_Click;
-
-                            nameLabel.Location = new Point(5, 5);
-                            priceLabel.Location = new Point(5, 25);
-                            addToCartButton.Location = new Point(5, 50);
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }
@@ -389,11 +398,11 @@ namespace Jewelry_Project
 
                             };
 
-                            Label nameLabel = new Label { Text = itemName, AutoSize = true };
-                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), AutoSize = true };
+                            Label nameLabel = new Label { Text = itemName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), Font = new Font("Mongolian Baiti", 10), AutoSize = true };
 
                             Button addToCartButton = new Button();
-                            addToCartButton.Text = "Add to Cart";
+                            addToCartButton.Text = "Add to Cart";   
                             addToCartButton.Click += addToCartButton_Click;
 
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
@@ -402,6 +411,8 @@ namespace Jewelry_Project
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 Dock = DockStyle.Fill,
+                                BackColor = Color.FloralWhite,
+                                BorderStyle = BorderStyle.None,
                             };
 
 
@@ -413,10 +424,6 @@ namespace Jewelry_Project
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
                             itemPanel.Click += panel_Click;
-
-                            nameLabel.Location = new Point(5, 5);
-                            priceLabel.Location = new Point(5, 25);
-                            addToCartButton.Location = new Point(5, 50);
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }

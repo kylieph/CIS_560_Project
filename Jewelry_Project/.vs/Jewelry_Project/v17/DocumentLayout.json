@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|c:\\users\\kgpri\\onedrive\\desktop\\cis560project\\jewelry_project\\jewelry_project\\customercartform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\customercartform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|c:\\users\\kgpri\\onedrive\\desktop\\cis560project\\jewelry_project\\jewelry_project\\addingitemform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\addingitemform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|c:\\users\\kgpri\\onedrive\\desktop\\cis560project\\jewelry_project\\jewelry_project\\addingitemform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\addingitemform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|c:\\users\\kgpri\\onedrive\\desktop\\cis560project\\jewelry_project\\jewelry_project\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,20 +31,20 @@
       "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\customercartform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\jewelry_project\\customercartform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0FABAF-6F7C-4FE7-AE02-119E011B5D97}|Jewelry_Project\\Jewelry_Project.csproj|solutionrelative:jewelry_project\\customercartform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,33 +70,83 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddingItemForm.cs",
+              "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AddingItemForm.cs",
+              "RelativeDocumentMoniker": "Jewelry_Project\\AddingItemForm.cs",
+              "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AddingItemForm.cs",
+              "RelativeToolTip": "Jewelry_Project\\AddingItemForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:31:21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AddingItemForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AddingItemForm.cs",
+              "RelativeDocumentMoniker": "Jewelry_Project\\AddingItemForm.cs",
+              "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AddingItemForm.cs [Design]",
+              "RelativeToolTip": "Jewelry_Project\\AddingItemForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:23:09.311Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AdminForm.cs",
+              "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AdminForm.cs",
+              "RelativeDocumentMoniker": "Jewelry_Project\\AdminForm.cs",
+              "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AdminForm.cs",
+              "RelativeToolTip": "Jewelry_Project\\AdminForm.cs",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAQwJgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T16:49:40.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AdminForm.cs",
+              "RelativeDocumentMoniker": "Jewelry_Project\\AdminForm.cs",
+              "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\AdminForm.cs [Design]",
+              "RelativeToolTip": "Jewelry_Project\\AdminForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T16:38:38.451Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "CustomerCartForm.cs",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerCartForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\CustomerCartForm.cs",
               "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerCartForm.cs",
               "RelativeToolTip": "Jewelry_Project\\CustomerCartForm.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAxwC0AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T21:58:19.754Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\LoginForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\LoginForm.cs",
               "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\LoginForm.cs",
               "RelativeToolTip": "Jewelry_Project\\LoginForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAkwGgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T21:06:20.248Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "LoginForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\LoginForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\LoginForm.cs",
@@ -92,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "CustomerForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\CustomerForm.cs",
@@ -104,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "CustomerCartForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerCartForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\CustomerCartForm.cs",
@@ -116,27 +182,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "CustomerForm.cs",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\CustomerForm.cs",
               "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\CustomerForm.cs",
               "RelativeToolTip": "Jewelry_Project\\CustomerForm.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAgwI4AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAkwH4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-25T19:56:21.82Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "ProfileForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\ProfileForm.cs",
               "RelativeDocumentMoniker": "Jewelry_Project\\ProfileForm.cs",
               "ToolTip": "C:\\Users\\kgpri\\OneDrive\\Desktop\\CIS560Project\\Jewelry_Project\\Jewelry_Project\\ProfileForm.cs [Design]",
               "RelativeToolTip": "Jewelry_Project\\ProfileForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T19:44:09.9Z"
+              "WhenOpened": "2025-04-25T19:44:09.9Z",
+              "EditorCaption": " [Design]"
             }
           ]
         },

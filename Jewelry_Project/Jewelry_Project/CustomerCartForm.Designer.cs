@@ -38,39 +38,42 @@
             // cartLabel
             // 
             this.cartLabel.AutoSize = true;
-            this.cartLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cartLabel.Font = new System.Drawing.Font("Mongolian Baiti", 14F);
             this.cartLabel.Location = new System.Drawing.Point(334, 31);
             this.cartLabel.Name = "cartLabel";
-            this.cartLabel.Size = new System.Drawing.Size(114, 29);
+            this.cartLabel.Size = new System.Drawing.Size(125, 30);
             this.cartLabel.TabIndex = 1;
             this.cartLabel.Text = "Your Cart";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
             this.label1.Location = new System.Drawing.Point(182, 373);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 25);
+            this.label1.Size = new System.Drawing.Size(70, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "Total:";
             // 
             // totalDisplayLabel
             // 
             this.totalDisplayLabel.AutoSize = true;
-            this.totalDisplayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.totalDisplayLabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
             this.totalDisplayLabel.Location = new System.Drawing.Point(260, 373);
             this.totalDisplayLabel.Name = "totalDisplayLabel";
-            this.totalDisplayLabel.Size = new System.Drawing.Size(23, 25);
+            this.totalDisplayLabel.Size = new System.Drawing.Size(24, 25);
             this.totalDisplayLabel.TabIndex = 3;
             this.totalDisplayLabel.Text = "$";
             // 
             // checkoutButton
             // 
-            this.checkoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.checkoutButton.AutoSize = true;
+            this.checkoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.checkoutButton.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
             this.checkoutButton.Location = new System.Drawing.Point(507, 362);
             this.checkoutButton.Name = "checkoutButton";
-            this.checkoutButton.Size = new System.Drawing.Size(134, 47);
+            this.checkoutButton.Padding = new System.Windows.Forms.Padding(5);
+            this.checkoutButton.Size = new System.Drawing.Size(125, 45);
             this.checkoutButton.TabIndex = 4;
             this.checkoutButton.Text = "Checkout";
             this.checkoutButton.UseVisualStyleBackColor = true;
@@ -90,12 +93,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.checkoutButton);
             this.Controls.Add(this.totalDisplayLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cartLabel);
+            this.ForeColor = System.Drawing.Color.DimGray;
             this.Name = "CustomerCartForm";
             this.Text = "Cart";
             this.Load += new System.EventHandler(this.CustomerCartForm_Load);
