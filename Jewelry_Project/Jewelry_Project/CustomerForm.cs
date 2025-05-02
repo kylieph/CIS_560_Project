@@ -53,8 +53,7 @@ namespace Jewelry_Project
         }
 		private PictureBox CreateItemImageBox()
 		{
-			string imagePath = Path.Combine(Application.StartupPath, @"Images\Necklace.png");
-			Console.WriteLine("Image path: " + imagePath);
+			string imagePath = Path.Combine(Application.StartupPath, "Images", "Necklace.png");
 
 			PictureBox itemImageBox = new PictureBox()
 			{
