@@ -18,6 +18,9 @@ namespace Jewelry_Project
 			InitializeComponent();
 			passwordTextBox.Enabled = true;
 			phoneNumberBox.Enabled = true;
+			this.MinimumSize = new Size(500, 600);
+			this.AutoSize = true;
+			this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 		}
 
 		private void newAccountButton_Click(object sender, EventArgs e)
