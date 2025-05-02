@@ -21,10 +21,5 @@ namespace Jewelry_Project
 
             flowLayoutPanel1.Margin = new Padding(20);
         }
-
-        private void itemNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

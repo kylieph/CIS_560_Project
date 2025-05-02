@@ -13,13 +13,13 @@ namespace Jewelry_Project
 {
     public partial class ProfileForm : Form
     {
-        public ProfileForm(string username)
+		private string _username;
+
+		public ProfileForm(string username)
         {
             InitializeComponent();
             _username = username;
         }
-
-        private string _username;
 
         private void ProfileForm_Load(object sender, EventArgs e)
         {

@@ -139,7 +139,7 @@ namespace Jewelry_Project
                         cmd.Parameters.AddWithValue("@ItemName", itemNameTextBox.Text);
                         cmd.Parameters.AddWithValue("@ItemPrice", itemPrice);
                         cmd.Parameters.AddWithValue("@StockQuantity", stockQuantity);
-                        cmd.Parameters.AddWithValue("@Description", stockQuantityTextBox.Text);
+                        cmd.Parameters.AddWithValue("@Description", itemDescriptionTextBox.Text);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.ExecuteReader();
                     }
