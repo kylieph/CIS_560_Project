@@ -70,7 +70,7 @@
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.82353F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.17647F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.82353F));
-			this.tableLayoutPanel.Size = new System.Drawing.Size(1385, 389);
+			this.tableLayoutPanel.Size = new System.Drawing.Size(1385, 426);
 			this.tableLayoutPanel.TabIndex = 11;
 			// 
 			// panel1
@@ -126,11 +126,11 @@
 			this.filteringFlowLayoutPanel.Controls.Add(this.customersTableLayoutPanel);
 			this.filteringFlowLayoutPanel.Controls.Add(this.button1);
 			this.filteringFlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.filteringFlowLayoutPanel.Location = new System.Drawing.Point(24, 97);
+			this.filteringFlowLayoutPanel.Location = new System.Drawing.Point(24, 105);
 			this.filteringFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.filteringFlowLayoutPanel.Name = "filteringFlowLayoutPanel";
 			this.filteringFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(16, 15, 16, 15);
-			this.filteringFlowLayoutPanel.Size = new System.Drawing.Size(384, 269);
+			this.filteringFlowLayoutPanel.Size = new System.Drawing.Size(384, 298);
 			this.filteringFlowLayoutPanel.TabIndex = 11;
 			this.filteringFlowLayoutPanel.WrapContents = false;
 			// 
@@ -154,9 +154,9 @@
 			this.popularItemsButton.Margin = new System.Windows.Forms.Padding(4);
 			this.popularItemsButton.Name = "popularItemsButton";
 			this.popularItemsButton.Padding = new System.Windows.Forms.Padding(4);
-			this.popularItemsButton.Size = new System.Drawing.Size(248, 47);
+			this.popularItemsButton.Size = new System.Drawing.Size(284, 76);
 			this.popularItemsButton.TabIndex = 3;
-			this.popularItemsButton.Text = "Most Popular Items";
+			this.popularItemsButton.Text = "Most Popular Items in \r\nthe Last 3 Months";
 			this.popularItemsButton.UseVisualStyleBackColor = true;
 			this.popularItemsButton.Click += new System.EventHandler(this.popularItemsButton_Click);
 			// 
@@ -165,7 +165,7 @@
 			this.highestPriceButton.AutoSize = true;
 			this.highestPriceButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.highestPriceButton.Font = new System.Drawing.Font("Mongolian Baiti", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.highestPriceButton.Location = new System.Drawing.Point(20, 103);
+			this.highestPriceButton.Location = new System.Drawing.Point(20, 132);
 			this.highestPriceButton.Margin = new System.Windows.Forms.Padding(4);
 			this.highestPriceButton.Name = "highestPriceButton";
 			this.highestPriceButton.Padding = new System.Windows.Forms.Padding(4);
@@ -179,7 +179,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(20, 154);
+			this.label2.Location = new System.Drawing.Point(20, 183);
 			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(344, 29);
@@ -191,7 +191,7 @@
 			this.button1.AutoSize = true;
 			this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(20, 203);
+			this.button1.Location = new System.Drawing.Point(20, 232);
 			this.button1.Margin = new System.Windows.Forms.Padding(4);
 			this.button1.Name = "button1";
 			this.button1.Padding = new System.Windows.Forms.Padding(4);
@@ -211,7 +211,7 @@
 			this.customersTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.46774F));
 			this.customersTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.53226F));
 			this.customersTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.46774F));
-			this.customersTableLayoutPanel.Location = new System.Drawing.Point(20, 187);
+			this.customersTableLayoutPanel.Location = new System.Drawing.Point(20, 216);
 			this.customersTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.customersTableLayoutPanel.Name = "customersTableLayoutPanel";
 			this.customersTableLayoutPanel.Padding = new System.Windows.Forms.Padding(4);
@@ -228,7 +228,7 @@
 			this.itemsFlowLayoutPanel.AutoSize = true;
 			this.itemsFlowLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.itemsFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.itemsFlowLayoutPanel.Location = new System.Drawing.Point(416, 97);
+			this.itemsFlowLayoutPanel.Location = new System.Drawing.Point(416, 105);
 			this.itemsFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.itemsFlowLayoutPanel.Name = "itemsFlowLayoutPanel";
 			this.itemsFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
