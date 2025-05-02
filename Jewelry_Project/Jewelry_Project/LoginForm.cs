@@ -74,11 +74,13 @@ namespace Jewelry_Project
                             else
                             {
                                 MessageBox.Show("Invalid password.");
+                                return;
                             }
                         }
                         else
                         {
                             MessageBox.Show("Username not found.");
+                            return;
                         }
                     }
                 }

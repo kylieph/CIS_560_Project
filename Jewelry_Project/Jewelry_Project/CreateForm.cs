@@ -33,7 +33,8 @@ namespace Jewelry_Project
 			string addressAttempt = addressTextBox.Text;
 			string cityAttempt = cityBox.Text;
 			string stateAttempt = stateBox.Text;
-			int zipAttempt = Convert.ToInt32(zipcodeBox.Text);
+			int zipAttempt;
+			bool zB = int.TryParse(zipcodeBox.Text, out zipAttempt);
 
 			if (string.IsNullOrWhiteSpace(emailAttempt) || string.IsNullOrWhiteSpace(usernameAttempt) || string.IsNullOrWhiteSpace(passwordAttempt))
 			{

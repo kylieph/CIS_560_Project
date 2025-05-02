@@ -64,6 +64,8 @@ namespace Jewelry_Project
 				Margin = new Padding(10)
 			};
 
+            itemImageBox.Click += item_Click;
+
 			return itemImageBox;
 		}
 
@@ -109,6 +111,10 @@ namespace Jewelry_Project
                             addToCartButton.Text = "Add to Cart";
                             addToCartButton.Click += addToCartButton_Click;
 
+                            Button viewInfoButton = new Button();
+                            viewInfoButton.Text = "View Info";
+                            viewInfoButton.Click += viewButton_Click;
+
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.TopDown,
@@ -117,7 +123,10 @@ namespace Jewelry_Project
                                 Dock = DockStyle.Fill,
                             };
 
+                            PictureBox itemImageBox = CreateItemImageBox();
 
+                            flowLayoutPanel.Controls.Add(viewInfoButton);
+                            flowLayoutPanel.Controls.Add(itemImageBox);
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
@@ -125,7 +134,7 @@ namespace Jewelry_Project
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;
+                            itemPanel.Click += item_Click;
 
                             nameLabel.Location = new Point(5, 5);
                             priceLabel.Location = new Point(5, 25);
@@ -137,6 +146,7 @@ namespace Jewelry_Project
                 }
             }
         }
+
         private void addToCartButton_Click(object sender, EventArgs e)
         {
             Button addButton = sender as Button;
@@ -172,18 +182,40 @@ namespace Jewelry_Project
                     }
                 }
 				MessageBox.Show(itemName + " added to cart successfully!");
-                _cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
+                //_cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
 			}
         }
-
-        private void panel_Click(object sender, EventArgs e)
+        private void viewButton_Click(object sender, EventArgs e)
         {
-            Panel clickedPanel = sender as Panel;
-            if (clickedPanel != null && clickedPanel.Tag is Tuple<string, string, string> itemInfo)
+            Button addButton = sender as Button;
+            if (addButton?.Parent?.Parent is Panel itemPanel && itemPanel.Tag is Tuple<string, string, decimal> itemInfo)
+            {
+                string itemName = itemInfo.Item1;
+                string description = itemInfo.Item2;
+                decimal price = itemInfo.Item3;
+                ItemInfoForm itemForm = new ItemInfoForm(itemName, description, price.ToString());
+                itemForm.Show();
+            }
+        }
+
+        private void item_Click(object sender, EventArgs e)
+        {
+            Control clickedControl = sender as Control;
+
+            // Traverse up the control hierarchy to find the Panel with the Tag
+            Panel itemPanel = null;
+            while (clickedControl != null && !(clickedControl is Panel))
+            {
+                clickedControl = clickedControl.Parent;
+            }
+
+            itemPanel = clickedControl as Panel;
+
+            if (itemPanel != null && itemPanel.Tag is Tuple<string, string, decimal> itemInfo)
             {
                 string name = itemInfo.Item1;
                 string description = itemInfo.Item2;
-                string price = itemInfo.Item3;
+                string price = itemInfo.Item3.ToString("F2");
                 ItemInfoForm itemInfoForm = new ItemInfoForm(name, description, price);
                 itemInfoForm.Show();
             }
@@ -257,6 +289,10 @@ namespace Jewelry_Project
                             Button addToCartButton = new Button() { Text = "Add to Cart", Font = new Font("Mongolian Baiti", 10), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(6) };
                             addToCartButton.Click += addToCartButton_Click;
 
+                            Button viewInfoButton = new Button();
+                            viewInfoButton.Text = "View Info";
+                            viewInfoButton.Click += viewButton_Click;
+
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.TopDown,
@@ -270,6 +306,7 @@ namespace Jewelry_Project
 
 							PictureBox itemImageBox = CreateItemImageBox();
 
+                            flowLayoutPanel.Controls.Add(viewInfoButton);
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
@@ -278,7 +315,7 @@ namespace Jewelry_Project
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
 							itemPanel.BackColor = Color.Transparent;
-							itemPanel.Click += panel_Click;                          
+							itemPanel.Click += item_Click;                          
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);                           
                         }
@@ -348,6 +385,10 @@ namespace Jewelry_Project
                             addToCartButton.Text = "Add to Cart";
                             addToCartButton.Click += addToCartButton_Click;
 
+                            Button viewInfoButton = new Button();
+                            viewInfoButton.Text = "View Info";
+                            viewInfoButton.Click += viewButton_Click;
+
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.TopDown,
@@ -358,7 +399,10 @@ namespace Jewelry_Project
                                 BorderStyle = BorderStyle.None,
                             };
 
+                            PictureBox itemImageBox = CreateItemImageBox();
 
+                            flowLayoutPanel.Controls.Add(viewInfoButton);
+                            flowLayoutPanel.Controls.Add(itemImageBox);
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
@@ -366,7 +410,7 @@ namespace Jewelry_Project
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;
+                            itemPanel.Click += item_Click;
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }
@@ -430,6 +474,10 @@ namespace Jewelry_Project
                             addToCartButton.Text = "Add to Cart";   
                             addToCartButton.Click += addToCartButton_Click;
 
+                            Button viewInfoButton = new Button();
+                            viewInfoButton.Text = "View Info";
+                            viewInfoButton.Click += viewButton_Click;
+
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.TopDown,
@@ -440,7 +488,10 @@ namespace Jewelry_Project
                                 BorderStyle = BorderStyle.None,
                             };
 
+                            PictureBox itemImageBox = CreateItemImageBox();
 
+                            flowLayoutPanel.Controls.Add(viewInfoButton);
+                            flowLayoutPanel.Controls.Add(itemImageBox);
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
@@ -448,7 +499,7 @@ namespace Jewelry_Project
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;
+                            itemPanel.Click += item_Click;
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }
@@ -491,6 +542,10 @@ namespace Jewelry_Project
                             Button addToCartButton = new Button() { Text = "Add to Cart", Font = new Font("Mongolian Baiti", 10), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(6) };
                             addToCartButton.Click += addToCartButton_Click;
 
+                            Button viewInfoButton = new Button();
+                            viewInfoButton.Text = "View Info";
+                            viewInfoButton.Click += viewButton_Click;
+
                             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
                             {
                                 FlowDirection = FlowDirection.TopDown,
@@ -502,13 +557,17 @@ namespace Jewelry_Project
                                 Margin = new Padding(15),
                             };
 
+                            PictureBox itemImageBox = CreateItemImageBox();
+
+                            flowLayoutPanel.Controls.Add(viewInfoButton);
+                            flowLayoutPanel.Controls.Add(itemImageBox);
                             flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;
+                            itemPanel.Click += item_Click;
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);
                         }
@@ -520,7 +579,9 @@ namespace Jewelry_Project
 
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
-			Application.Exit();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+            this.Hide();
 		}
 
         private void CloseAll(object sender, FormClosingEventArgs e)

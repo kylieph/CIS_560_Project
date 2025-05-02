@@ -17,7 +17,14 @@ namespace Jewelry_Project
             InitializeComponent();
             itemNameLabel.Text = name;
             descriptionLabel.Text = description;
-            priceLabel.Text = price;
+            priceLabel.Text = "$" + price;
+
+            flowLayoutPanel1.Margin = new Padding(20);
+        }
+
+        private void itemNameLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
