@@ -50,7 +50,6 @@ namespace Jewelry_Project
                             string hashedPassword = reader["HashPassword"].ToString().Trim();
                             bool isAdmin = Convert.ToBoolean(reader["IsAdmin"]);
 
-							Console.WriteLine("Stored hash: '" + hashedPassword + "'");
 							bool valid = BCrypt.Net.BCrypt.Verify(passwordAttempt, hashedPassword);
                             /*bool valid = false;
                             if (passwordAttempt.Equals(hashedPassword))
@@ -77,13 +76,11 @@ namespace Jewelry_Project
                             else
                             {
                                 MessageBox.Show("Invalid password.");
-                                return;
                             }
                         }
                         else
                         {
                             MessageBox.Show("Username not found.");
-                            return;
                         }
                     }
                 }
