@@ -100,7 +100,6 @@ namespace Jewelry_Project
                     }
                 }
 
-
                 using (SqlCommand cmd = new SqlCommand("Store.GetHighestSpendingCustomers", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;

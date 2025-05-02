@@ -34,6 +34,7 @@ namespace Jewelry_Project
 
         private void Login(string usernameAttempt, string passwordAttempt)
         {
+            bool formOpen = false;
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -62,11 +63,13 @@ namespace Jewelry_Project
                             {
                                 if (isAdmin)
                                 {
+                                    formOpen = true;
                                     AdminForm adminForm = new AdminForm(usernameAttempt);
                                     adminForm.Show();
                                 }
                                 else
                                 {
+                                    formOpen = true;
                                     CustomerForm customerForm = new CustomerForm(usernameAttempt);
                                     customerForm.Show();
                                 }
@@ -86,7 +89,7 @@ namespace Jewelry_Project
                 }
             }
 			_loginCheck = true;
-            this.Hide();
+            if (formOpen) this.Hide();
 		}
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
