@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< Updated upstream
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.itemsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -234,7 +233,7 @@
             this.filteringFlowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-=======
+
 			this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.itemsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -453,7 +452,6 @@
 			this.filteringFlowLayoutPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
->>>>>>> Stashed changes
 
         }
 

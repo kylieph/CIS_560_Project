@@ -129,18 +129,12 @@ namespace Jewelry_Project
                                 Dock = DockStyle.Fill,
                             };
 
-<<<<<<< Updated upstream
-                            PictureBox itemImageBox = CreateItemImageBox();
-
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-                            flowLayoutPanel.Controls.Add(itemImageBox);
-                            flowLayoutPanel.Controls.Add(nameLabel);
-=======
 							PictureBox itemImageBox = CreateItemImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
->>>>>>> Stashed changes
+
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             flowLayoutPanel.Margin = new Padding(16);
@@ -195,11 +189,8 @@ namespace Jewelry_Project
                     }
                 }
 				MessageBox.Show(itemName + " added to cart successfully!");
-<<<<<<< Updated upstream
-                //_cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
-=======
+
                 if (_cartForm != null) _cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
->>>>>>> Stashed changes
 			}
         }
         private void viewButton_Click(object sender, EventArgs e)
@@ -416,18 +407,13 @@ namespace Jewelry_Project
                                 BorderStyle = BorderStyle.None,
                             };
 
-                            PictureBox itemImageBox = CreateItemImageBox();
 
-<<<<<<< Updated upstream
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-                            flowLayoutPanel.Controls.Add(itemImageBox);
-                            flowLayoutPanel.Controls.Add(nameLabel);
-=======
 							PictureBox itemImageBox = CreateItemImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
->>>>>>> Stashed changes
+
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             flowLayoutPanel.Margin = new Padding(16);
@@ -512,18 +498,15 @@ namespace Jewelry_Project
                                 BorderStyle = BorderStyle.None,
                             };
 
-<<<<<<< Updated upstream
-                            PictureBox itemImageBox = CreateItemImageBox();
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-                            flowLayoutPanel.Controls.Add(itemImageBox);
                             flowLayoutPanel.Controls.Add(nameLabel);
-=======
-							PictureBox itemImageBox = CreateItemImageBox();
+    
+                            PictureBox itemImageBox = CreateItemImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
->>>>>>> Stashed changes
+
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             flowLayoutPanel.Margin = new Padding(16);
@@ -588,18 +571,13 @@ namespace Jewelry_Project
                                 Margin = new Padding(15),
                             };
 
-<<<<<<< Updated upstream
-                            PictureBox itemImageBox = CreateItemImageBox();
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-                            flowLayoutPanel.Controls.Add(itemImageBox);
-                            flowLayoutPanel.Controls.Add(nameLabel);
-=======
 							PictureBox itemImageBox = CreateItemImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
->>>>>>> Stashed changes
+
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             itemPanel.Controls.Add(flowLayoutPanel);
