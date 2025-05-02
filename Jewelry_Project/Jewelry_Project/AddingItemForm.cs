@@ -13,7 +13,8 @@ namespace Jewelry_Project
 {
     public partial class AddingItemForm : Form
     {
-        public AddingItemForm()
+		public event EventHandler ItemAdded;
+		public AddingItemForm()
         {
             InitializeComponent();
         }
@@ -144,14 +145,10 @@ namespace Jewelry_Project
                     }
                 }
                 MessageBox.Show("Product Added.");
-                stockQuantityTextBox.Text = string.Empty;
-                itemNameTextBox.Text = string.Empty;
-                itemPriceTextBox.Text = string.Empty;
-                itemDescriptionTextBox.Text = string.Empty;
-                categoryIDTextBox.Text = string.Empty;
-                metalIDTextBox.Text = string.Empty;
-                goldsmithIDTextBox.Text = string.Empty;
+				this.Close();
             }
+			ItemAdded?.Invoke(this, EventArgs.Empty);
+
         }
     }
 }

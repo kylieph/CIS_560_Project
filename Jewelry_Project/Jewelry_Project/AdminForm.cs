@@ -22,7 +22,7 @@ namespace Jewelry_Project
 			this.FormClosing += new FormClosingEventHandler(CloseAll);
 		}
 
-        private void AdminForm_Load(object sender, EventArgs e)
+        public void AdminForm_Load(object sender, EventArgs e)
         {
             filteringFlowLayoutPanel.AutoSize = true;
             filteringFlowLayoutPanel.Margin = new Padding(5);
@@ -130,8 +130,8 @@ namespace Jewelry_Project
         private void addItemButton_Click(object sender, EventArgs e)
         {
             AddingItemForm addingItemForm = new AddingItemForm();
-            addingItemForm.Show();
-            AdminForm_Load(null, null);
+            addingItemForm.ItemAdded += AdminForm_Load;
+			addingItemForm.Show();
 		}
 
         private void deleteItem_Click(object sender, EventArgs e)
