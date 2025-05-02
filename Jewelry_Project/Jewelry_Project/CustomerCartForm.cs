@@ -90,37 +90,61 @@ namespace Jewelry_Project
         private void minusButton_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            string itemName;
-            int itemID = 0;
-            if (b != null && b.Tag != null)
-            {
-                itemName = b.Tag.ToString();
-                string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
-                using (SqlConnection conn = new SqlConnection(connString))
-                {
-                    conn.Open();
-                    string sql = "SELECT StockItemID FROM Store.[Items] WHERE ItemName = @ItemName";
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@ItemName", itemName);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                itemID = Convert.ToInt32(reader["StockItemID"]);
-                            }
-                        }
-                    }
+            if (b == null || b.Tag == null) return;
 
-                    using (SqlCommand cmd = new SqlCommand("Store.DecreaseCartQuantity", conn))
+            string itemName = b.Tag.ToString();
+            int itemID = 0;
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                // Get item ID
+                string getIDSql = "SELECT StockItemID FROM Store.[Items] WHERE ItemName = @ItemName";
+                using (SqlCommand cmd = new SqlCommand(getIDSql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ItemName", itemName);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                        itemID = Convert.ToInt32(result);
+                }
+
+                // Call procedure to decrease quantity
+                using (SqlCommand cmd = new SqlCommand("Store.DecreaseCartQuantity", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserID", _userID);
+                    cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Check if quantity is now 0 or less
+                int quantity = 0;
+                string checkQtySql = "SELECT Quantity FROM Store.[Cart] WHERE UserID = @UserID AND StockItemID = @StockItemID";
+                using (SqlCommand cmd = new SqlCommand(checkQtySql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", _userID);
+                    cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                        quantity = Convert.ToInt32(result);
+                }
+
+                // If quantity <= 0, delete the row
+                if (quantity <= 0)
+                {
+                    string deleteSql = "DELETE FROM Store.[Cart] WHERE UserID = @UserID AND StockItemID = @StockItemID";
+                    using (SqlCommand cmd = new SqlCommand(deleteSql, conn))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@UserID", _userID);
                         cmd.Parameters.AddWithValue("@StockItemID", itemID);
-                        cmd.ExecuteReader();
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
+
+            // Refresh cart display
             CustomerCartForm_Load(null, null);
         }
 
