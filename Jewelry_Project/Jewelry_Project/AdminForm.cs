@@ -18,7 +18,9 @@ namespace Jewelry_Project
             InitializeComponent();
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        }
+
+			this.FormClosing += new FormClosingEventHandler(CloseAll);
+		}
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
@@ -130,7 +132,8 @@ namespace Jewelry_Project
         {
             AddingItemForm addingItemForm = new AddingItemForm();
             addingItemForm.Show();
-        }
+            AdminForm_Load(null, null);
+		}
 
         private void deleteItem_Click(object sender, EventArgs e)
         {
@@ -295,5 +298,72 @@ namespace Jewelry_Project
                 }
             }
         }
-    }
+
+        private void ClearAllFilter_Click(object sender, EventArgs e)
+        {
+			itemsFlowLayoutPanel.Controls.Clear();
+			string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("Store.GetAllProducts", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            string description = reader["Description"].ToString();
+                            decimal itemPrice = (decimal)reader["ItemPrice"];
+
+                            Panel itemPanel = new Panel()
+                            {
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                BackColor = Color.White,
+                                BorderStyle = BorderStyle.FixedSingle,
+                                Margin = new Padding(8),
+                            };
+
+                            Label nameLabel = new Label { Text = itemName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+                            Label priceLabel = new Label { Text = "$" + itemPrice.ToString("F2"), Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+
+                            Button deleteItem = new Button();
+                            deleteItem.Text = "Delete Product";
+                            deleteItem.Click += deleteItem_Click;
+
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                                BackColor = Color.FloralWhite,
+                                Margin = new Padding(10),
+                            };
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(deleteItem);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+
+                            itemsFlowLayoutPanel.Controls.Add(itemPanel);
+                        }
+                    }
+                }
+            }
+        }
+
+		private void logoutBtn_Click(object sender, EventArgs e)
+		{
+            Application.Exit();
+		}
+		private void CloseAll(object sender, FormClosingEventArgs e)
+		{
+			Application.Exit();
+		}
+	}
 }

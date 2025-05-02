@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BCrypt.Net;
 
 namespace Jewelry_Project
 {
     public partial class LoginForm : Form
     {
+        private bool _loginCheck = false;
         public LoginForm()
         {
             InitializeComponent();
@@ -21,10 +23,13 @@ namespace Jewelry_Project
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (usernameTextBox.Text != null &&  passwordTextBox.Text != null)
+            if (!_loginCheck)
             {
-                Login(usernameTextBox.Text, passwordTextBox.Text);
-            }         
+                if (usernameTextBox.Text != null && passwordTextBox.Text != null)
+                {
+                    Login(usernameTextBox.Text, passwordTextBox.Text);
+                }
+            }
         }
 
         private void Login(string usernameAttempt, string passwordAttempt)
@@ -33,7 +38,7 @@ namespace Jewelry_Project
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                string sql = "SELECT NormPassword, IsAdmin FROM Store.[User] WHERE Username = @Username";
+                string sql = "SELECT HashPassword, IsAdmin FROM Store.[User] WHERE Username = @Username";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Username", usernameAttempt);
@@ -41,15 +46,16 @@ namespace Jewelry_Project
                     {
                         if (reader.Read())
                         {
-                            string hashedPassword = reader["NormPassword"].ToString();
+                            string hashedPassword = reader["HashPassword"].ToString().Trim();
                             bool isAdmin = Convert.ToBoolean(reader["IsAdmin"]);
 
-                            //bool valid = BCrypt.Net.BCrypt.Verify(passwordAttempt, hashedPassword);
-                            bool valid = false;
+							Console.WriteLine("Stored hash: '" + hashedPassword + "'");
+							bool valid = BCrypt.Net.BCrypt.Verify(passwordAttempt, hashedPassword);
+                            /*bool valid = false;
                             if (passwordAttempt.Equals(hashedPassword))
                             {
                                 valid = true;
-                            }
+                            }*/
 
 
                             if (valid)
@@ -77,7 +83,9 @@ namespace Jewelry_Project
                     }
                 }
             }
-        }
+			_loginCheck = true;
+            this.Hide();
+		}
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -91,7 +99,7 @@ namespace Jewelry_Project
 
         private void newAccountButton_Click(object sender, EventArgs e)
         {
-            int count;
+			/*int count;
             string usernameAttempt = usernameTextBox.Text;
             string emailAttempt = emailTextBox.Text;
             string passwordAttempt = passwordTextBox.Text;
@@ -134,7 +142,9 @@ namespace Jewelry_Project
                 {
                     Login(usernameTextBox.Text, passwordTextBox.Text);
                 }
-            }           
-        }
+            }           */
+			CreateForm createForm = new CreateForm();
+            createForm.Show();
+		}
     }
 }

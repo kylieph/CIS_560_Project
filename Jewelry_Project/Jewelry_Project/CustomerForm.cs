@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,13 +20,15 @@ namespace Jewelry_Project
         private string _username;
         private int _userID;
         private List<(string Name, int Quantity, string Price)> cartItems = new List<(string Name, int Quantity, string Price)>();
+        private CustomerCartForm _cartForm = null;
 
-        public CustomerForm(string username)
+		public CustomerForm(string username)
         {
             InitializeComponent();
+			this.FormClosing += new FormClosingEventHandler(CloseAll);
 
-            _username = username;
-            usernameLabel.Text = username;
+			_username = username;
+            usernameLabel.Text = "Welcome, " + username + "!";
 
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
@@ -48,8 +51,25 @@ namespace Jewelry_Project
             filteringFlowLayoutPanel.Margin = new Padding(15);
             itemsFlowLayoutPanel.Margin = new Padding(15);
         }
+		private PictureBox CreateItemImageBox()
+		{
+			string imagePath = Path.Combine(Application.StartupPath, @"Images\Necklace.png");
+			Console.WriteLine("Image path: " + imagePath);
 
-        private void profileButton_Click(object sender, EventArgs e)
+			PictureBox itemImageBox = new PictureBox()
+			{
+				Width = 100,
+				Height = 100,
+				ImageLocation = imagePath, 
+				SizeMode = PictureBoxSizeMode.StretchImage, 
+				Margin = new Padding(10)
+			};
+
+			return itemImageBox;
+		}
+
+
+		private void profileButton_Click(object sender, EventArgs e)
         {
             ProfileForm profileForm = new ProfileForm(_username);
             profileForm.Show();
@@ -152,7 +172,9 @@ namespace Jewelry_Project
                         cmd.ExecuteNonQuery();
                     }
                 }
-            }
+				MessageBox.Show(itemName + " added to cart successfully!");
+                _cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
+			}
         }
 
         private void panel_Click(object sender, EventArgs e)
@@ -245,15 +267,19 @@ namespace Jewelry_Project
                                 BackColor = Color.FloralWhite,
                                 BorderStyle = BorderStyle.FixedSingle,
                                 Margin = new Padding(15),
-                            };                            
+                            };
 
-                            flowLayoutPanel.Controls.Add(nameLabel);
+							PictureBox itemImageBox = CreateItemImageBox();
+
+							flowLayoutPanel.Controls.Add(itemImageBox);
+							flowLayoutPanel.Controls.Add(nameLabel);
                             flowLayoutPanel.Controls.Add(priceLabel);
                             flowLayoutPanel.Controls.Add(addToCartButton);
                             itemPanel.Controls.Add(flowLayoutPanel);
 
                             itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
-                            itemPanel.Click += panel_Click;                          
+							itemPanel.BackColor = Color.Transparent;
+							itemPanel.Click += panel_Click;                          
 
                             itemsFlowLayoutPanel.Controls.Add(itemPanel);                           
                         }
@@ -264,8 +290,8 @@ namespace Jewelry_Project
 
         private void cartButton_Click(object sender, EventArgs e)
         {
-            CustomerCartForm cartForm = new CustomerCartForm(_userID);
-            cartForm.Show();
+            _cartForm = new CustomerCartForm(_userID);
+            _cartForm.Show();
         }
 
         private void metalComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -431,5 +457,76 @@ namespace Jewelry_Project
                 }
             }
         }
-    }
+
+        private void clearAllFilters_Click(object sender, EventArgs e)
+        {
+            categoryComboBox.Text = " ";
+            metalComboBox.Text = " ";
+            itemsFlowLayoutPanel.Controls.Clear();
+
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("Store.GetAllProducts", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            string description = reader["Description"].ToString();
+                            decimal itemPrice = (decimal)reader["ItemPrice"];
+
+                            Panel itemPanel = new Panel()
+                            {
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Margin = new Padding(16)
+                            };
+
+                            Label nameLabel = new Label { Text = itemName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+                            Label priceLabel = new Label { Text = "Price: $" + itemPrice.ToString("F2"), Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+
+                            Button addToCartButton = new Button() { Text = "Add to Cart", Font = new Font("Mongolian Baiti", 10), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(6) };
+                            addToCartButton.Click += addToCartButton_Click;
+
+                            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+                            {
+                                FlowDirection = FlowDirection.TopDown,
+                                AutoSize = true,
+                                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                                Dock = DockStyle.Fill,
+                                BackColor = Color.FloralWhite,
+                                BorderStyle = BorderStyle.FixedSingle,
+                                Margin = new Padding(15),
+                            };
+
+                            flowLayoutPanel.Controls.Add(nameLabel);
+                            flowLayoutPanel.Controls.Add(priceLabel);
+                            flowLayoutPanel.Controls.Add(addToCartButton);
+                            itemPanel.Controls.Add(flowLayoutPanel);
+
+                            itemPanel.Tag = Tuple.Create(itemName, description, itemPrice);
+                            itemPanel.Click += panel_Click;
+
+                            itemsFlowLayoutPanel.Controls.Add(itemPanel);
+                        }
+                    }
+                }
+
+            }
+        }
+
+		private void logoutBtn_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+        private void CloseAll(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+		}
+	}
 }

@@ -82,7 +82,7 @@ namespace Jewelry_Project
                         cmd.Parameters.AddWithValue("@StockItemID", itemID);
                         cmd.ExecuteReader();
                     }
-                }
+				}
             }
             CustomerCartForm_Load(null, null);
         }
@@ -124,7 +124,7 @@ namespace Jewelry_Project
             CustomerCartForm_Load(null, null);
         }
 
-        private void CustomerCartForm_Load(object sender, EventArgs e)
+        public void CustomerCartForm_Load(object sender, EventArgs e)
         {
             flowLayoutPanel.Controls.Clear();
 
@@ -147,7 +147,7 @@ namespace Jewelry_Project
 
                             string itemName = reader["ItemName"].ToString();
                             Label nameLabel = new Label() { Text = itemName, AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(5) };
-                            
+
                             string stringQuantity = reader["Quantity"].ToString();
                             Label quantityLabel = new Label() { Text = stringQuantity, AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(5) };
                             int quantity = Convert.ToInt32(stringQuantity);
@@ -162,7 +162,7 @@ namespace Jewelry_Project
                             Label totalPriceLabel = new Label() { Text = totalPrice, AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(5) };
 
                             TableLayoutPanel innerPanel = new TableLayoutPanel()
-                            {                                
+                            {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                                 ColumnCount = 6,
@@ -174,7 +174,7 @@ namespace Jewelry_Project
                             Button minusButton = new Button() { Text = "-", AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(5) };
                             minusButton.Tag = itemName;
                             minusButton.Click += minusButton_Click;
-                            Button plusButton = new Button() { Text = "+", AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(5) }; 
+                            Button plusButton = new Button() { Text = "+", AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(5) };
                             plusButton.Tag = itemName;
                             plusButton.Click += plusButton_Click;
 
@@ -185,7 +185,11 @@ namespace Jewelry_Project
                             innerPanel.Controls.Add(plusButton, 4, 0);
                             innerPanel.Controls.Add(totalPriceLabel, 5, 0);
 
-                            flowLayoutPanel.Controls.Add(innerPanel);                         
+                            flowLayoutPanel.Controls.Add(innerPanel);
+                            if (itemCount == 0)
+                            {
+                                minusButton.Enabled = false;
+							}
                         }
                     }
                 }
