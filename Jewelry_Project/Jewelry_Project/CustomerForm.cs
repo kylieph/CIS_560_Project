@@ -21,7 +21,11 @@ namespace Jewelry_Project
         private int _userID;
         private List<(string Name, int Quantity, string Price)> cartItems = new List<(string Name, int Quantity, string Price)>();
         private CustomerCartForm _cartForm = null;
-		private static Image _cachedImage = null;
+		private static Image _cachedNecklace = null;
+        private static Image _cachedEarrings = null;
+		private static Image _cachedRings = null;
+		private static Image _cachedBracelets = null;
+		private static Image _cachedAnklets = null;
 
 		public CustomerForm(string username)
         {
@@ -52,29 +56,118 @@ namespace Jewelry_Project
             filteringFlowLayoutPanel.Margin = new Padding(15);
             itemsFlowLayoutPanel.Margin = new Padding(15);
         }
-		private PictureBox CreateItemImageBox()
+		private PictureBox CreateNecklaceImageBox()
 		{
-			if (_cachedImage == null)
+			if (_cachedNecklace == null)
 			{
 				string imagePath = Path.Combine(Application.StartupPath, "Images", "Necklace.png");
-				_cachedImage = Image.FromFile(imagePath);
+				_cachedNecklace = Image.FromFile(imagePath);
 			}
 
 
-			PictureBox itemImageBox = new PictureBox()
-			{
-				Width = 100,
-				Height = 100,
-				Image = _cachedImage, 
-				SizeMode = PictureBoxSizeMode.StretchImage, 
-				Margin = new Padding(10)
-			};
+            PictureBox itemImageBox = new PictureBox()
+            {
+                Width = 100,
+                Height = 100,
+                Image = _cachedNecklace,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Margin = new Padding(10)
+            };
 
             itemImageBox.Click += item_Click;
 
 			return itemImageBox;
 		}
 
+		private PictureBox CreateEarringsImageBox()
+		{
+			if (_cachedEarrings == null)
+			{
+				string imagePath = Path.Combine(Application.StartupPath, "Images", "Earrings.jpg");
+				_cachedEarrings = Image.FromFile(imagePath);
+			}
+
+			PictureBox itemImageBox = new PictureBox()
+			{
+				Width = 100,
+				Height = 100,
+				Image = _cachedEarrings,
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				Margin = new Padding(10)
+			};
+
+			itemImageBox.Click += item_Click;
+
+			return itemImageBox;
+		}
+
+		private PictureBox CreateRingsImageBox()
+		{
+			if (_cachedRings == null)
+			{
+				string imagePath = Path.Combine(Application.StartupPath, "Images", "Ring.png");
+				_cachedRings = Image.FromFile(imagePath);
+			}
+
+			Console.WriteLine("Necklace image loaded: " + _cachedRings);
+
+			PictureBox itemImageBox = new PictureBox()
+			{
+				Width = 100,
+				Height = 100,
+				Image = _cachedRings,
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				Margin = new Padding(10)
+			};
+
+			itemImageBox.Click += item_Click;
+
+			return itemImageBox;
+		}
+
+		private PictureBox CreateAnkletsImageBox()
+		{
+			if (_cachedAnklets == null)
+			{
+				string imagePath = Path.Combine(Application.StartupPath, "Images", "Anklet.png");
+				_cachedAnklets = Image.FromFile(imagePath);
+			}
+
+			PictureBox itemImageBox = new PictureBox()
+			{
+				Width = 100,
+				Height = 100,
+				Image = _cachedAnklets,
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				Margin = new Padding(10)
+			};
+
+			itemImageBox.Click += item_Click;
+
+			return itemImageBox;
+		}
+
+		private PictureBox CreateBraceletsImageBox()
+		{
+			if (_cachedBracelets == null)
+			{
+				string imagePath = Path.Combine(Application.StartupPath, "Images", "Bracelet.jpg");
+				_cachedBracelets = Image.FromFile(imagePath);
+			}
+
+			PictureBox itemImageBox = new PictureBox()
+			{
+				Width = 100,
+				Height = 100,
+				Image = _cachedBracelets,
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				Margin = new Padding(10)
+			};
+
+			itemImageBox.Click += item_Click;
+
+			return itemImageBox;
+		}
 
 		private void profileButton_Click(object sender, EventArgs e)
         {
@@ -130,7 +223,7 @@ namespace Jewelry_Project
                             };
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-							PictureBox itemImageBox = CreateItemImageBox();
+							PictureBox itemImageBox = CreateNecklaceImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
@@ -283,8 +376,9 @@ namespace Jewelry_Project
                             string itemName = reader["ItemName"].ToString();
                             string description = reader["Description"].ToString();
                             decimal itemPrice = (decimal)reader["ItemPrice"];
+							int imageType = (int)reader["CategoryID"];
 
-                            Panel itemPanel = new Panel()
+							Panel itemPanel = new Panel()
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -312,7 +406,13 @@ namespace Jewelry_Project
                                 Margin = new Padding(15),
                             };
 
-							PictureBox itemImageBox = CreateItemImageBox();
+                            PictureBox itemImageBox = null;
+
+							if (imageType == 1) itemImageBox = CreateRingsImageBox();
+							if (imageType == 2) itemImageBox = CreateEarringsImageBox();
+							if (imageType == 3) itemImageBox = CreateBraceletsImageBox();
+							if (imageType == 4) itemImageBox = CreateNecklaceImageBox();
+							if (imageType == 5) itemImageBox = CreateAnkletsImageBox();
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
 							flowLayoutPanel.Controls.Add(itemImageBox);
@@ -376,8 +476,9 @@ namespace Jewelry_Project
                             string itemName = reader["ItemName"].ToString();
                             string description = reader["Description"].ToString();
                             decimal itemPrice = (decimal)reader["ItemPrice"];
+							int imageType = (int)reader["CategoryID"];
 
-                            Panel itemPanel = new Panel()
+							Panel itemPanel = new Panel()
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -409,7 +510,13 @@ namespace Jewelry_Project
 
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-							PictureBox itemImageBox = CreateItemImageBox();
+							PictureBox itemImageBox = null;
+
+							if (imageType == 1) itemImageBox = CreateRingsImageBox();
+							if (imageType == 2) itemImageBox = CreateEarringsImageBox();
+							if (imageType == 3) itemImageBox = CreateBraceletsImageBox();
+							if (imageType == 4) itemImageBox = CreateNecklaceImageBox();
+							if (imageType == 5) itemImageBox = CreateAnkletsImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
@@ -467,8 +574,9 @@ namespace Jewelry_Project
                             string itemName = reader["ItemName"].ToString();
                             string description = reader["Description"].ToString();
                             decimal itemPrice = (decimal)reader["ItemPrice"];
+							int imageType = (int)reader["CategoryID"];
 
-                            Panel itemPanel = new Panel()
+							Panel itemPanel = new Panel()
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -501,8 +609,14 @@ namespace Jewelry_Project
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
                             flowLayoutPanel.Controls.Add(nameLabel);
-    
-                            PictureBox itemImageBox = CreateItemImageBox();
+
+							PictureBox itemImageBox = null;
+
+							if (imageType == 1) itemImageBox = CreateRingsImageBox();
+							if (imageType == 2) itemImageBox = CreateEarringsImageBox();
+							if (imageType == 3) itemImageBox = CreateBraceletsImageBox();
+							if (imageType == 4) itemImageBox = CreateNecklaceImageBox();
+							if (imageType == 5) itemImageBox = CreateAnkletsImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
@@ -542,8 +656,9 @@ namespace Jewelry_Project
                             string itemName = reader["ItemName"].ToString();
                             string description = reader["Description"].ToString();
                             decimal itemPrice = (decimal)reader["ItemPrice"];
+							int imageType = (int)reader["CategoryID"];
 
-                            Panel itemPanel = new Panel()
+							Panel itemPanel = new Panel()
                             {
                                 AutoSize = true,
                                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -573,7 +688,13 @@ namespace Jewelry_Project
 
 
                             flowLayoutPanel.Controls.Add(viewInfoButton);
-							PictureBox itemImageBox = CreateItemImageBox();
+							PictureBox itemImageBox = null;
+
+							if (imageType == 1) itemImageBox = CreateRingsImageBox();
+							if (imageType == 2) itemImageBox = CreateEarringsImageBox();
+							if (imageType == 3) itemImageBox = CreateBraceletsImageBox();
+							if (imageType == 4) itemImageBox = CreateNecklaceImageBox();
+							if (imageType == 5) itemImageBox = CreateAnkletsImageBox();
 
 							flowLayoutPanel.Controls.Add(itemImageBox);
 							flowLayoutPanel.Controls.Add(nameLabel);
@@ -595,9 +716,7 @@ namespace Jewelry_Project
 
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
-            this.Hide();
+            Application.Exit();
 		}
 
         private void CloseAll(object sender, FormClosingEventArgs e)

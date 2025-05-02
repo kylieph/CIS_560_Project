@@ -47,7 +47,22 @@ namespace Jewelry_Project
             customersTableLayoutPanel.Controls.Add(header1, 0, 0);
             customersTableLayoutPanel.Controls.Add(header2, 1, 0);
 
-            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+			Label header3 = new Label { Text = "Goldsmith", Font = new Font("Mongolian Baiti", 10, FontStyle.Italic), AutoSize = true, Margin = new Padding(3) };
+			Label header4 = new Label { Text = "Total Sales", Font = new Font("Mongolian Baiti", 10, FontStyle.Italic), AutoSize = true, Anchor = AnchorStyles.Right, Margin = new Padding(3) };
+
+			popularGoldsmithLayout.RowCount = 0;
+			popularGoldsmithLayout.ColumnCount = 2;
+			popularGoldsmithLayout.Controls.Clear();
+			popularGoldsmithLayout.ColumnStyles.Clear();
+			popularGoldsmithLayout.RowStyles.Clear();
+			popularGoldsmithLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+			popularGoldsmithLayout.RowCount++;
+			popularGoldsmithLayout.Controls.Add(header3, 0, 0);
+			popularGoldsmithLayout.Controls.Add(header4, 1, 0);
+
+
+			string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
@@ -124,7 +139,32 @@ namespace Jewelry_Project
                         }
                     }
                 }
-            }
+
+				using (SqlCommand cmd = new SqlCommand("Store.GetPopularGoldsmith", conn))
+				{
+					cmd.CommandType = CommandType.StoredProcedure;
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						int rowCount = 1;
+						while (reader.Read())
+						{
+							string userName = reader["GoldsmithName"].ToString();
+							string totalSales = reader["TotalSales"].ToString();
+
+							popularGoldsmithLayout.RowCount++;
+							popularGoldsmithLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+							Label nameLabel = new Label { Text = userName, Font = new Font("Mongolian Baiti", 10), AutoSize = true };
+							Label totalSalesLabel = new Label { Text = "$ " + totalSales, Font = new Font("Mongolian Baiti", 10), TextAlign = ContentAlignment.MiddleRight, AutoSize = true, Anchor = AnchorStyles.Right };
+
+							popularGoldsmithLayout.Controls.Add(nameLabel, 0, rowCount);
+							popularGoldsmithLayout.Controls.Add(totalSalesLabel, 1, rowCount);
+
+							rowCount++;
+						}
+					}
+				}
+			}
         }
 
         private void addItemButton_Click(object sender, EventArgs e)

@@ -14,23 +14,22 @@ namespace Jewelry_Project
 {
     public partial class LoginForm : Form
     {
-        private bool _loginCheck = false;
         public LoginForm()
         {
             InitializeComponent();
-            loginButton.Click -= loginButton_Click;
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (!_loginCheck)
+            if (usernameTextBox.Text != null && passwordTextBox.Text != null)
             {
-                if (usernameTextBox.Text != null && passwordTextBox.Text != null)
-                {
-                    Login(usernameTextBox.Text, passwordTextBox.Text);
-                }
+                Login(usernameTextBox.Text, passwordTextBox.Text);
             }
-        }
+			else
+			{
+				MessageBox.Show("Please enter a username and password.");
+			}
+		}
 
         private void Login(string usernameAttempt, string passwordAttempt)
         {
@@ -50,16 +49,11 @@ namespace Jewelry_Project
                             string hashedPassword = reader["HashPassword"].ToString().Trim();
                             bool isAdmin = Convert.ToBoolean(reader["IsAdmin"]);
 
-							bool valid = BCrypt.Net.BCrypt.Verify(passwordAttempt, hashedPassword);
-                            /*bool valid = false;
-                            if (passwordAttempt.Equals(hashedPassword))
-                            {
-                                valid = true;
-                            }*/
-
+                            bool valid = BCrypt.Net.BCrypt.Verify(passwordAttempt, hashedPassword);
 
                             if (valid)
                             {
+                                formOpen = true;
                                 if (isAdmin)
                                 {
                                     formOpen = true;
@@ -85,8 +79,11 @@ namespace Jewelry_Project
                     }
                 }
             }
-			_loginCheck = true;
-            if (formOpen) this.Hide();
+			if (formOpen)
+			{
+				this.Hide();
+			}
+
 		}
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
@@ -94,57 +91,9 @@ namespace Jewelry_Project
             passwordTextBox.Enabled = true;
         }
 
-        private void passwordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            loginButton.Click += loginButton_Click;
-        }
 
         private void newAccountButton_Click(object sender, EventArgs e)
         {
-			/*int count;
-            string usernameAttempt = usernameTextBox.Text;
-            string emailAttempt = emailTextBox.Text;
-            string passwordAttempt = passwordTextBox.Text;
-
-            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                conn.Open();
-                string sql = "SELECT COUNT(*) FROM Store.[User] WHERE Username = @Username";
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Username", usernameAttempt);
-                    count = (int)cmd.ExecuteScalar();
-                }
-                if (count > 0)
-                {
-                    MessageBox.Show("Username taken.");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(emailAttempt) || string.IsNullOrWhiteSpace(usernameAttempt) || string.IsNullOrWhiteSpace(passwordAttempt))
-                {
-                    MessageBox.Show("All fields are required.");
-                    return;
-                }
-                using (SqlCommand cmdInsert = new SqlCommand("Store.CreateUser", conn))
-                {
-                    cmdInsert.CommandType = CommandType.StoredProcedure;
-
-                    cmdInsert.Parameters.AddWithValue("@Email", emailAttempt);
-                    cmdInsert.Parameters.AddWithValue("@Username", usernameAttempt);
-                    cmdInsert.Parameters.AddWithValue("@NormPassword", passwordAttempt);
-                    cmdInsert.Parameters.AddWithValue("@IsAdmin", 0);
-                    cmdInsert.Parameters.AddWithValue("@AccountOpenedDate", DateTime.Now);
-
-                    cmdInsert.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Account created successfully!");
-                if (usernameTextBox.Text != null && passwordTextBox.Text != null)
-                {
-                    Login(usernameTextBox.Text, passwordTextBox.Text);
-                }
-            }           */
 			CreateForm createForm = new CreateForm();
             createForm.Show();
 		}

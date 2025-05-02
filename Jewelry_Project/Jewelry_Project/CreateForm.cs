@@ -39,9 +39,10 @@ namespace Jewelry_Project
 			int zipAttempt;
 			bool zB = int.TryParse(zipcodeBox.Text, out zipAttempt);
 
-			if (string.IsNullOrWhiteSpace(emailAttempt) || string.IsNullOrWhiteSpace(usernameAttempt) || string.IsNullOrWhiteSpace(passwordAttempt))
+			if (string.IsNullOrWhiteSpace(emailAttempt) || string.IsNullOrWhiteSpace(usernameAttempt) || string.IsNullOrWhiteSpace(passwordAttempt) || string.IsNullOrWhiteSpace(nameAttempt) || 
+				string.IsNullOrWhiteSpace(addressAttempt) || string.IsNullOrWhiteSpace(cityAttempt) || string.IsNullOrWhiteSpace(stateAttempt) || string.IsNullOrWhiteSpace(zipcodeBox.Text) )
 			{
-				MessageBox.Show("All fields are required.");
+				MessageBox.Show("Please fill in all required fields.");
 				return;
 			}
 

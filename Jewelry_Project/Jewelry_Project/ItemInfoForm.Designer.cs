@@ -44,7 +44,6 @@
             this.itemNameLabel.Size = new System.Drawing.Size(92, 32);
             this.itemNameLabel.TabIndex = 0;
             this.itemNameLabel.Text = "label1";
-            this.itemNameLabel.Click += new System.EventHandler(this.itemNameLabel_Click);
             // 
             // priceLabel
             // 

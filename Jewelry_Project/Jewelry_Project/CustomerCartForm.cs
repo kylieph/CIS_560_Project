@@ -222,10 +222,5 @@ namespace Jewelry_Project
             _subtotal = subtotal;
             _itemCount = itemCount;
         }
-
-        private void MinusButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
