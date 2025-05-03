@@ -18,8 +18,6 @@ namespace Jewelry_Project
             InitializeComponent();
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-
-			this.FormClosing += new FormClosingEventHandler(CloseAll);
 		}
 
         public void AdminForm_Load(object sender, EventArgs e)
@@ -398,7 +396,9 @@ namespace Jewelry_Project
 
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
-            Application.Exit();
+            this.Close();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
 		}
 		private void CloseAll(object sender, FormClosingEventArgs e)
 		{
