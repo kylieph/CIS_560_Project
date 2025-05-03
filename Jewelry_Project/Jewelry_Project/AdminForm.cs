@@ -11,7 +11,10 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
-    public partial class AdminForm : Form
+	/// <summary>
+	/// Homepage for admin logged in. Here, the admin can add a product, delete a product, and view the most popular items.
+	/// </summary>
+	public partial class AdminForm : Form
     {
         public AdminForm(string username)
         {
@@ -20,7 +23,10 @@ namespace Jewelry_Project
             tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 		}
 
-        public void AdminForm_Load(object sender, EventArgs e)
+		/// <summary>
+		/// Loads in the database for the admin to view the most popular items, highest spending customers, and the most popular goldsmiths.
+		/// </summary>
+		public void AdminForm_Load(object sender, EventArgs e)
         {
             filteringFlowLayoutPanel.AutoSize = true;
             filteringFlowLayoutPanel.Margin = new Padding(5);
@@ -165,6 +171,9 @@ namespace Jewelry_Project
 			}
         }
 
+        /// <summary>
+        /// Allows admin to open form to add product to products
+        /// </summary>
         private void addItemButton_Click(object sender, EventArgs e)
         {
             AddingItemForm addingItemForm = new AddingItemForm();
@@ -172,6 +181,9 @@ namespace Jewelry_Project
 			addingItemForm.Show();
 		}
 
+        /// <summary>
+        /// Allows admin to delete product
+        /// </summary>
         private void deleteItem_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -221,7 +233,10 @@ namespace Jewelry_Project
             
         }
 
-        private void popularItemsButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Filters the products to show only the most popular items from the past 3 months
+		/// </summary>
+		private void popularItemsButton_Click(object sender, EventArgs e)
         {
             itemsFlowLayoutPanel.Controls.Clear();
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
@@ -279,6 +294,9 @@ namespace Jewelry_Project
             }
         }
 
+        /// <summary>
+        /// Sorts the products to show the most expensive item first
+        /// </summary>
         private void highestPriceButton_Click(object sender, EventArgs e)
         {
             itemsFlowLayoutPanel.Controls.Clear();
@@ -336,6 +354,9 @@ namespace Jewelry_Project
             }
         }
 
+        /// <summary>
+        /// Reset all filters
+        /// </summary>
         private void ClearAllFilter_Click(object sender, EventArgs e)
         {
 			itemsFlowLayoutPanel.Controls.Clear();
@@ -394,12 +415,18 @@ namespace Jewelry_Project
             }
         }
 
+		/// <summary>
+		/// Logs the admin out and closes the form
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
             this.Close();
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
 		}
+
 		private void CloseAll(object sender, FormClosingEventArgs e)
 		{
 			Application.Exit();

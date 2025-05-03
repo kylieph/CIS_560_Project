@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Jewelry_Project
-{
+{   
+    /// <summary>
+    /// Allows the admin to add products that users are able to purchase.
+    /// </summary>
     public partial class AddingItemForm : Form
     {
 		public event EventHandler ItemAdded;
@@ -19,7 +22,10 @@ namespace Jewelry_Project
             InitializeComponent();
         }
 
-        private void addItemButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Checks the input of the user and adds the product to the database.
+		/// </summary>
+		private void addItemButton_Click(object sender, EventArgs e)
         {
             decimal itemPrice = 0;
             int goldsmithID = 0;

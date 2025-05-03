@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
+    /// <summary>
+    /// User is able to view their email, username, and phone number
+    /// </summary>
     public partial class ProfileForm : Form
     {
 		private string _username;
@@ -20,7 +23,10 @@ namespace Jewelry_Project
             InitializeComponent();
             _username = username;
         }
-
+        
+        /// <summary>
+        /// Loads the information in about the user
+        /// </summary>
         private void ProfileForm_Load(object sender, EventArgs e)
         {
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";

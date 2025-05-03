@@ -10,9 +10,15 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
+    /// <summary>
+    /// Consists of details regarding a product
+    /// </summary>
     public partial class ItemInfoForm : Form
     {
-        public ItemInfoForm(string name, string description, string price)
+		/// <summary>
+		/// Loads in the information about the product
+		/// </summary>
+		public ItemInfoForm(string name, string description, string price)
         {
             InitializeComponent();
             itemNameLabel.Text = name;

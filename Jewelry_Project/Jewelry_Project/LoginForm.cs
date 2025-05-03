@@ -12,6 +12,9 @@ using BCrypt.Net;
 
 namespace Jewelry_Project
 {
+    /// <summary>
+    /// Allows user to login or create a new account
+    /// </summary>
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -19,6 +22,9 @@ namespace Jewelry_Project
             InitializeComponent();
         }
 
+        /// <summary>
+        /// User is able to login
+        /// </summary>
         private void loginButton_Click(object sender, EventArgs e)
         {
             if (usernameTextBox.Text != null && passwordTextBox.Text != null)
@@ -31,6 +37,9 @@ namespace Jewelry_Project
 			}
 		}
 
+        /// <summary>
+        /// Decides whether to open up one of the forms or deny the user access
+        /// </summary>
         private void Login(string usernameAttempt, string passwordAttempt)
         {
             bool formOpen = false;
@@ -86,13 +95,18 @@ namespace Jewelry_Project
 
 		}
 
-        private void usernameTextBox_TextChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Enables the password text box when the user enters a username
+		/// </summary>
+		private void usernameTextBox_TextChanged(object sender, EventArgs e)
         {
             passwordTextBox.Enabled = true;
         }
 
-
-        private void newAccountButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Opens up the create account form
+		/// </summary>
+		private void newAccountButton_Click(object sender, EventArgs e)
         {
 			CreateForm createForm = new CreateForm();
             createForm.Show();

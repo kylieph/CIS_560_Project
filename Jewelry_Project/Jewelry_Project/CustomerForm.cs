@@ -15,7 +15,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Jewelry_Project
 {
-    public partial class CustomerForm : Form
+	/// <summary>
+	/// Homepage for the customer logged in. Here the customer can view all products, filter by metal type or category, and add items to their cart.
+	/// </summary>
+	public partial class CustomerForm : Form
     {
         private string _username;
         private int _userID;
@@ -55,6 +58,11 @@ namespace Jewelry_Project
             filteringFlowLayoutPanel.Margin = new Padding(15);
             itemsFlowLayoutPanel.Margin = new Padding(15);
         }
+        
+        /// <summary>
+        /// Creates the image for the necklace
+        /// </summary>
+        /// <returns></returns>
 		private PictureBox CreateNecklaceImageBox()
 		{
 			if (_cachedNecklace == null)
@@ -78,6 +86,10 @@ namespace Jewelry_Project
 			return itemImageBox;
 		}
 
+        /// <summary>
+        /// Creates image for earrings
+        /// </summary>
+        /// <returns></returns>
 		private PictureBox CreateEarringsImageBox()
 		{
 			if (_cachedEarrings == null)
@@ -100,6 +112,10 @@ namespace Jewelry_Project
 			return itemImageBox;
 		}
 
+		/// <summary>
+		/// Creates image for rings
+		/// </summary>
+		/// <returns></returns>
 		private PictureBox CreateRingsImageBox()
 		{
 			if (_cachedRings == null)
@@ -124,6 +140,10 @@ namespace Jewelry_Project
 			return itemImageBox;
 		}
 
+		/// <summary>
+		/// Creates image for anklets
+		/// </summary>
+		/// <returns></returns>
 		private PictureBox CreateAnkletsImageBox()
 		{
 			if (_cachedAnklets == null)
@@ -146,6 +166,10 @@ namespace Jewelry_Project
 			return itemImageBox;
 		}
 
+        /// <summary>
+        /// Creates image for bracelets
+        /// </summary>
+        /// <returns></returns>
 		private PictureBox CreateBraceletsImageBox()
 		{
 			if (_cachedBracelets == null)
@@ -168,12 +192,18 @@ namespace Jewelry_Project
 			return itemImageBox;
 		}
 
+		/// <summary>
+		/// User can view their profile
+		/// </summary>
 		private void profileButton_Click(object sender, EventArgs e)
         {
             ProfileForm profileForm = new ProfileForm(_username);
             profileForm.Show();
         }
 
+        /// <summary>
+        /// Filters by new releases of products from the past 3 months
+        /// </summary>
         private void newReleasesButton_Click(object sender, EventArgs e)
         {
             categoryComboBox.Text = " ";
@@ -246,7 +276,10 @@ namespace Jewelry_Project
             }
         }
 
-        private void addToCartButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User can add items to their cart
+		/// </summary>
+		private void addToCartButton_Click(object sender, EventArgs e)
         {
             Button addButton = sender as Button;
             if (addButton?.Parent?.Parent is Panel itemPanel && itemPanel.Tag is Tuple<string, string, decimal> itemInfo)
@@ -307,6 +340,10 @@ namespace Jewelry_Project
                 if (_cartForm != null) _cartForm.CustomerCartForm_Load(null, null); // Refresh the cart form if it's open
 			}
         }
+
+        /// <summary>
+        /// User can view the product details
+        /// </summary>
         private void viewButton_Click(object sender, EventArgs e)
         {
             Button addButton = sender as Button;
@@ -320,7 +357,10 @@ namespace Jewelry_Project
             }
         }
 
-        private void item_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User can click on the item to view the product details
+		/// </summary>
+		private void item_Click(object sender, EventArgs e)
         {
             Control clickedControl = sender as Control;
 
@@ -343,6 +383,9 @@ namespace Jewelry_Project
             }
         }
 
+        /// <summary>
+        /// Customer form loads in all information about products and user
+        /// </summary>
         private void CustomerForm_Load(object sender, EventArgs e)
         {
             tableLayoutPanel.Dock = DockStyle.Fill;
@@ -453,13 +496,19 @@ namespace Jewelry_Project
             }
         }
 
+        /// <summary>
+        /// User clicks to open up cart
+        /// </summary>
         private void cartButton_Click(object sender, EventArgs e)
         {
             _cartForm = new CustomerCartForm(_userID);
             _cartForm.Show();
         }
 
-        private void metalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Selects metal type to filter by
+		/// </summary>
+		private void metalComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             categoryComboBox.Text = " ";
             string metalType = metalComboBox.SelectedItem.ToString();
@@ -557,7 +606,10 @@ namespace Jewelry_Project
             }
         }
 
-        private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Selects category to filter by
+		/// </summary>
+		private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             metalComboBox.Text = " ";
             string categoryType = categoryComboBox.SelectedItem.ToString();
@@ -657,7 +709,10 @@ namespace Jewelry_Project
             }
         }
 
-        private void clearAllFilters_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Clears all filters and shows all products
+		/// </summary>
+		private void clearAllFilters_Click(object sender, EventArgs e)
         {
             categoryComboBox.Text = " ";
             metalComboBox.Text = " ";
@@ -735,6 +790,9 @@ namespace Jewelry_Project
             }
         }
 
+        /// <summary>
+        /// Allows user to logout and close form
+        /// </summary>
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
             this.Close();

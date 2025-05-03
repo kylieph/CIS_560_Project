@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
+	/// <summary>
+	/// Allows the user to create a new account.
+	/// </summary>
 	public partial class CreateForm : Form
 	{
 		public CreateForm()
@@ -23,6 +26,9 @@ namespace Jewelry_Project
 			this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 		}
 
+		/// <summary>
+		/// Submits the information to the database and creates a new account.
+		/// </summary>
 		private void newAccountButton_Click(object sender, EventArgs e)
 		{
 			int usernameCount;

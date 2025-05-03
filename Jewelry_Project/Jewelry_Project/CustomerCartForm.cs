@@ -11,7 +11,10 @@ using System.Windows.Forms;
 
 namespace Jewelry_Project
 {
-    public partial class CustomerCartForm : Form
+	/// <summary>
+	/// Contains all the items that a ccustomer has added to their cart.
+	/// </summary>
+	public partial class CustomerCartForm : Form
     {
         private int _userID;
 
@@ -25,7 +28,10 @@ namespace Jewelry_Project
             _userID = userID;
         }
 
-        private void checkoutButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Allows to user checkout with the items that is in their cart.
+		/// </summary>
+		private void checkoutButton_Click(object sender, EventArgs e)
         {
             string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             if (flowLayoutPanel.Controls.Count > 0)
@@ -50,15 +56,6 @@ namespace Jewelry_Project
                         }
                     }
 
-                    
-                    /*using (SqlCommand cmd2 = new SqlCommand("Store.InsertOrderLine", conn))
-                    {
-                        cmd2.CommandType = CommandType.StoredProcedure;
-                        cmd2.Parameters.AddWithValue("@UserID", _userID);
-                        cmd2.Parameters.AddWithValue("@OrderID", orderID);
-                        cmd2.ExecuteNonQuery();
-                    }*/
-
                     using (SqlCommand cmd3 = new SqlCommand("Store.DeleteCartItems", conn))
                     {
                         cmd3.CommandType = CommandType.StoredProcedure;
@@ -77,7 +74,10 @@ namespace Jewelry_Project
             
         }
 
-        private void plusButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User is able to add a quantity of 1, if allowed, to the item in their cart.
+		/// </summary>
+		private void plusButton_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
             string itemName;
@@ -139,7 +139,10 @@ namespace Jewelry_Project
             CustomerCartForm_Load(null, null);
         }
 
-        private void minusButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User is able to remove a quantity of 1, if allowed, to the item in their cart.
+		/// </summary>
+		private void minusButton_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
             if (b == null || b.Tag == null) return;
@@ -200,7 +203,10 @@ namespace Jewelry_Project
             CustomerCartForm_Load(null, null);
         }
 
-        public void CustomerCartForm_Load(object sender, EventArgs e)
+		/// <summary>
+		/// Loads the cart items for the customer.
+		/// </summary>
+		public void CustomerCartForm_Load(object sender, EventArgs e)
         {
             flowLayoutPanel.Controls.Clear();
 
