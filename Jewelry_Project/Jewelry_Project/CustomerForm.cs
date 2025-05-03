@@ -30,7 +30,6 @@ namespace Jewelry_Project
 		public CustomerForm(string username)
         {
             InitializeComponent();
-			this.FormClosing += new FormClosingEventHandler(CloseAll);
 
 			_username = username;
             usernameLabel.Text = "Welcome, " + username + "!";
@@ -272,6 +271,28 @@ namespace Jewelry_Project
                         }
                     }
 
+                    int quantity = 0;
+                    string checkQtySql = "SELECT Quantity FROM Store.[Cart] WHERE UserID = @UserID AND StockItemID = @StockItemID";
+                    using (SqlCommand cmd = new SqlCommand(checkQtySql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", _userID);
+                        cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                            quantity = Convert.ToInt32(result);
+                    }
+                    int quantityMax = 0;
+                    string checkMaxSql = "SELECT StockQuantity FROM Store.[Items] WHERE StockItemID = @StockItemID";
+                    using (SqlCommand cmd = new SqlCommand(checkMaxSql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                        quantityMax = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                    if (quantity >= quantityMax)
+                    {
+                        MessageBox.Show("Out of stock.");
+                        return;
+                    }
 
                     using (SqlCommand cmd = new SqlCommand("Store.AddToCart", conn))
                     {
@@ -716,8 +737,10 @@ namespace Jewelry_Project
 
 		private void logoutBtn_Click(object sender, EventArgs e)
 		{
-            Application.Exit();
-		}
+            this.Close();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+        }
 
         private void CloseAll(object sender, FormClosingEventArgs e)
         {

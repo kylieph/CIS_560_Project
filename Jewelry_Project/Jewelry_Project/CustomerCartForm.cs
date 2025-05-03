@@ -27,27 +27,54 @@ namespace Jewelry_Project
 
         private void checkoutButton_Click(object sender, EventArgs e)
         {
+            string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
             if (flowLayoutPanel.Controls.Count > 0)
             {
                 MessageBox.Show($"Thank you for your purchase!\nItems Ordered: {_itemCount}\nSubtotal: ${_subtotal}\nExpect your order within 3-5 business days.");
                 flowLayoutPanel.Controls.Clear();
-                totalDisplayLabel.Text = "$";
-                string connString = "Server=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=true";
+                totalDisplayLabel.Text = "$";                
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
+                    int orderID = 0;
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("Store.DeleteCartItems", conn))
+                    string sql = "INSERT INTO Store.[Orders] (UserID) VALUES (@UserID)";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@UserID", _userID);
-                        using (SqlDataReader reader = cmd.ExecuteReader()) { }
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                orderID = Convert.ToInt32(reader["OrderID"]);
+                            }
+                        }
                     }
+
+                    
+                    /*using (SqlCommand cmd2 = new SqlCommand("Store.InsertOrderLine", conn))
+                    {
+                        cmd2.CommandType = CommandType.StoredProcedure;
+                        cmd2.Parameters.AddWithValue("@UserID", _userID);
+                        cmd2.Parameters.AddWithValue("@OrderID", orderID);
+                        cmd2.ExecuteNonQuery();
+                    }*/
+
+                    using (SqlCommand cmd3 = new SqlCommand("Store.DeleteCartItems", conn))
+                    {
+                        cmd3.CommandType = CommandType.StoredProcedure;
+                        cmd3.Parameters.AddWithValue("@UserID", _userID);
+                        cmd3.ExecuteReader();
+                    }
+
+                    
                 }
             }
             else
             {
                 MessageBox.Show("No items in your cart.");
             }
+
+            
         }
 
         private void plusButton_Click(object sender, EventArgs e)
@@ -75,6 +102,29 @@ namespace Jewelry_Project
                         }
                     }
 
+                    int quantity = 0;
+                    string checkQtySql = "SELECT Quantity FROM Store.[Cart] WHERE UserID = @UserID AND StockItemID = @StockItemID";
+                    using (SqlCommand cmd = new SqlCommand(checkQtySql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", _userID);
+                        cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                            quantity = Convert.ToInt32(result);
+                    }
+                    int quantityMax = 0;
+                    string checkMaxSql = "SELECT StockQuantity FROM Store.[Items] WHERE StockItemID = @StockItemID";
+                    using (SqlCommand cmd = new SqlCommand(checkMaxSql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@StockItemID", itemID);
+                        quantityMax = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                    if (quantity >= quantityMax)
+                    {
+                        MessageBox.Show("Out of stock.");
+                        return;
+                    }
+
                     using (SqlCommand cmd = new SqlCommand("Store.IncreaseCartQuantity", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -82,7 +132,9 @@ namespace Jewelry_Project
                         cmd.Parameters.AddWithValue("@StockItemID", itemID);
                         cmd.ExecuteReader();
                     }
-				}
+
+
+                }
             }
             CustomerCartForm_Load(null, null);
         }
